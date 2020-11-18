@@ -9,6 +9,7 @@ export class MovieDatabase extends BaseDatabase {
     try {
       const availableMoviesDB = await this.getConnection().raw(`
         SELECT * FROM ${this.tableMovie}
+        WHERE rented_to IS NULL
         ORDER BY title ASC
       `)
       const availableMovies: Movie[] = []
@@ -29,6 +30,7 @@ export class MovieDatabase extends BaseDatabase {
         SELECT * FROM ${this.tableMovie} 
         WHERE id = "${movieId}"
       `)
+      console.log(movie[0][0])
       return Movie.toMovieModel(movie[0][0])
     } catch (error) {
       throw new Error(error.sqlmessage || error.message)
@@ -39,13 +41,9 @@ export class MovieDatabase extends BaseDatabase {
     try {
       await this.getConnection().raw(`
         UPDATE ${this.tableMovie} 
-        SET available = false
+        SET rented_to = "${userId}"
         WHERE id = "${movieId}"
       `)
-      await this.getConnection().insert({
-        user_id: userId,
-        movie_id: movieId,
-      }).into(this.tableRented)
     } catch (error) {
       throw new Error(error.sqlmessage || error.message)
     }
@@ -55,13 +53,9 @@ export class MovieDatabase extends BaseDatabase {
     try {
       await this.getConnection().raw(`
         UPDATE ${this.tableMovie} 
-        SET available = true
+        SET rented_to = null
         WHERE id = "${movieId}"
       `)
-      await this.getConnection()
-        .del()
-        .where("movie_id", movieId)
-        .into(this.tableRented)
     } catch (error) {
       throw new Error(error.sqlmessage || error.message)
     }

@@ -1,11 +1,14 @@
 import { MovieDatabase } from "../data/MovieDatabase";
+import { UserDatabase } from "../data/UserDatabase";
 import { AvailableMovieDTO, Movie } from "../models/Movie";
+import { User } from "../models/User";
 import { TokenGenerator } from "../services/tokenGenerator";
 
 export class MovieBusiness {
   constructor(
     private movieDatabase: MovieDatabase,
-    private tokenGenerator: TokenGenerator
+    private tokenGenerator: TokenGenerator,
+    private userDatabase: UserDatabase
   ){}
   
   async getAvailableMovies(token: string): Promise<AvailableMovieDTO[]> {
@@ -17,13 +20,11 @@ export class MovieBusiness {
       const movieList: AvailableMovieDTO[] = []
 
       movieListDB.map((movie) => {
-        if(movie.getAvailable()) {
-          movieList.push({
-            title: movie.getTitle(),
-            director: movie.getDirector(),
-            quantity: 1
-          })
-        }
+        movieList.push({
+          title: movie.getTitle(),
+          director: movie.getDirector(),
+          quantity: 1
+        })
       })
 
       if(movieList.length === 0) {
@@ -54,7 +55,9 @@ export class MovieBusiness {
       const userId = await this.tokenGenerator.verify(token)
       const movie: Movie = await this.movieDatabase.getMovieById(movieId)
 
-      if(!movie.getAvailable()) {
+      console.log(movie)
+
+      if(movie.getRentedTo()) {
         throw Error('movie not available')
       }
 
@@ -70,7 +73,7 @@ export class MovieBusiness {
       await this.tokenGenerator.verify(token)
       const movie: Movie = await this.movieDatabase.getMovieById(movieId)
 
-      if(movie.getAvailable()) {
+      if(!movie.getRentedTo()) {
         throw Error('this movie is not rented')
       }
 
@@ -87,9 +90,16 @@ export class MovieBusiness {
 
       const movies: Movie[] = await this.movieDatabase.getMovieByTitle(movieTitle)
 
-      movies.map((movie) => {
-        movie.setAvailable(Boolean(Number(movie.getAvailable())))
-      })
+      await Promise.all(movies.map(async (movie) => {
+        if(movie.getRentedTo()) {
+          const user: User = await this.userDatabase.getUserById(movie.getRentedTo() as string)
+          movie.setRentedTo({
+            id: user.getId(),
+            name: user.getName(),
+            email: user.getEmail()
+          })
+        }
+      }))
 
       return movies
 

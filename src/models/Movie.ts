@@ -1,20 +1,20 @@
-import { User } from "./User"
+import { User, UserDisplayDTO } from "./User"
 
 export class Movie {
   constructor(
     private id: string,
     private title: string,
     private director: string,
-    private available: boolean
+    private rentedTo: string | null | UserDisplayDTO
   ){}
 
   getId() {return this.id}
   getTitle() {return this.title}
   getDirector() {return this.director}
-  getAvailable() {return this.available}
+  getRentedTo() {return this.rentedTo}
 
-  setAvailable(available: boolean): void {
-    this.available = available
+  setRentedTo(rentedTo: UserDisplayDTO) {
+    this.rentedTo = rentedTo
   }
 
   static toMovieModel(movie: any): Movie {
@@ -22,7 +22,7 @@ export class Movie {
       movie.id,
       movie.title,
       movie.director,
-      movie.available
+      movie.rented_to
     )
   }
 }
