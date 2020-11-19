@@ -30,7 +30,6 @@ export class MovieDatabase extends BaseDatabase {
         SELECT * FROM ${this.tableMovie} 
         WHERE id = "${movieId}"
       `)
-      console.log(movie[0][0])
       return Movie.toMovieModel(movie[0][0])
     } catch (error) {
       throw new Error(error.sqlmessage || error.message)
