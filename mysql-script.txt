@@ -1,0 +1,35 @@
+CREATE TABLE Videobuster_User (
+	id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Videobuster_Movie (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    director VARCHAR(255) NOT NULL,
+  	rented_to VARCHAR(255) DEFAULT NULL,
+  	FOREIGN KEY (rented_to) REFERENCES Videobuster_User(id)
+  	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+INSERT INTO Videobuster_Movie (title, director) VALUES
+("Tenet", "Scofield"), 
+("Tenet", "Scofield"),
+("Tenet", "Scofield"),
+("Jumanji", "Johnston"),
+("Jumanji", "Johnston"),
+("Amadeus", "Forman"),
+("Amadeus", "Forman"),
+("Amadeus", "Forman"),
+("Os Deuses Devem Estar Loucos", "Jamie"),
+("Snatch, Porcos e Diamantes", "Ritchie"),
+("Snatch, Porcos e Diamantes", "Ritchie"),
+("Os Deuses Devem Estar Loucos", "Jamie"),
+("Os Deuses Devem Estar Loucos", "Jamie"),
+("Amadeus", "Forman"),
+("Amadeus", "Forman"),
+("Os Deuses Devem Estar Loucos", "Jamie"),
+("Trainspotting", "Boyle");
