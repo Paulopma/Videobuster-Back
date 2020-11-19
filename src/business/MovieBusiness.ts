@@ -55,8 +55,6 @@ export class MovieBusiness {
       const userId = await this.tokenGenerator.verify(token)
       const movie: Movie = await this.movieDatabase.getMovieById(movieId)
 
-      console.log(movie)
-
       if(movie.getRentedTo()) {
         throw Error('movie not available')
       }

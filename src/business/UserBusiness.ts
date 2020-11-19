@@ -49,7 +49,7 @@ export class UserBusiness {
       await this.userDatabase.userSignup(newUser)
       return token
     } catch (error) {
-      throw Error(error.message || "Error creating user, send a zapt-zapt to your system administrator")
+      throw Error(error.message || "Error creating user, contact your system administrator")
     }
   }
   
@@ -69,7 +69,7 @@ export class UserBusiness {
       const token = this.tokenGenerator.generate({id: user.getId()})
       return token  
     } catch (error) {
-      throw Error(error.message || "Error in user login, send a zapt-zapt to your system administrator")
+      throw Error(error.message || "Error in user login, contact your system administrator")
     }
   }
 
