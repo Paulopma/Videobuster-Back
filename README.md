@@ -63,7 +63,7 @@ GET: http://localhost:3003/user/login
 
 Body:
 |email|password|
-| -------- |-------- |-------- |
+| -------- |-------- |
 |Paulo Aguiar|123456|
 
 <strong>Saída</strong>
@@ -82,7 +82,7 @@ GET: http://localhost:3003/movie/available
 
 Headers:
 |key|value|
-| -------- |-------- |-------- |
+| -------- |-------- |
 |Authorization|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxMTEzZWQzLWEzMzAtNDg5MS05MTlkLTIxMzg3NzAwZWVjNiIsImp0aSI6IjAxMTEzZWQzLWEzMzAtNDg5MS05MTlkLTIxMzg3NzAwZWVjNiIsImlhdCI6MTYwNTc1NTExMiwiZXhwIjoxNjA1NzkxMTEyfQ.j_sgOgFnm-KCyajmdaEzvmkO5vjgGfh4_nTtjkYpZUA|
 
 <strong>Saída</strong>

@@ -1,8 +1,6 @@
-import { UserBusiness } from "../src/business/UserBusiness"
-import { User, UserLoginDTO, UserSignupDTO } from "../src/models/User"
-import { GenericError } from "../src/services/errors/GenericError"
-import { InvalidParameterError } from "../src/services/errors/InvalidParameterError"
-import { UnauthorizedError } from "../src/services/errors/UnauthorizedError"
+import { UserBusiness } from "../../src/business/UserBusiness"
+import { User, UserSignupDTO } from "../../src/models/User"
+import { InvalidParameterError } from "../../src/services/errors/InvalidParameterError"
 
 describe('UserBusiness tests', () => {
 
