@@ -25,7 +25,7 @@ export class UserDatabase extends BaseDatabase {
       `)
 
       if(!user[0][0]) {
-        return
+        return undefined
       }
       
       return User.toUserModel(user[0][0])

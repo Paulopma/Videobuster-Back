@@ -2,19 +2,21 @@
   "name": "videobuster",
   "version": "1.0.0",
   "description": "phi-test",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start:dev": "ts-node-dev --ignore node_modules src/index.ts",
     "test": "jest"
   },
+  "jest": {
+    "collectCoverage": true
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/redis": "^2.8.28",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jest": "^26.4.2",
+    "jest": "^26.6.3",
     "jsonwebtoken": "^8.5.1",
     "jwt-redis": "^6.0.0",
     "knex": "^0.21.5",
@@ -25,6 +27,7 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
+    "@types/redis": "^2.8.28",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.10",
