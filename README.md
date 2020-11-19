@@ -24,6 +24,10 @@ Para que o sistema seja rodado na sua máquina você precisa realizar os seguint
 - - JWT_EXPIRES_IN = (tempo de expiração do token de acesso ex: 10hour)
 - - BCRYPT_COST = 12
 
+- As tabelas para o banco de dados devem ter os seguintes nomes:
+- - filmes: Videobuster_Movie
+- - usuários: Videobuster_User
+
 - Ainda na pasta raíz, rode o comando <i>npm install</i> para que todas as dependências necessárias sejam instaladas
 
 - Depois rode os comandos <i>npm run build</i> e <i>npm run start</i>. Pronto, o sistema já estará rodando na sua máquina.
